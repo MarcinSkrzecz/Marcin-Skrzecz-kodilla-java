@@ -13,10 +13,14 @@ repositories {
 }
 
 dependencies {
+    //External Dependencies
     implementation 'org.springframework.boot:spring-boot-starter'
+
+    //Test Dependencies
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
+    testCompile ('junit:junit:4.13')
 }
 
 test {
