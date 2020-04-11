@@ -25,7 +25,7 @@ public class CollectionTestSuite {
         OddNumbersExterminator testArray = new OddNumbersExterminator();
         System.out.println("Test: Case when ArrayList is empty");
         //Then
-        Assert.assertEquals(testArray.exterminate(numbers), numbers);
+        Assert.assertEquals(numbers, testArray.exterminate(numbers));
     }
 
         @Test
@@ -43,6 +43,6 @@ public class CollectionTestSuite {
             OddNumbersExterminator testArray = new OddNumbersExterminator();
             System.out.println("Test: Case when ArrayList is not empty");
             //Then
-            Assert.assertEquals(testArray.exterminate(numbers), evenList);
+            Assert.assertEquals(evenList, testArray.exterminate(numbers));
         }
 }
