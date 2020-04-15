@@ -6,8 +6,7 @@ public class ShapeCollector {
     private ArrayList<Shape> shapes = new ArrayList<Shape>();
 
     public void addFigure(Shape shape) {
-        Shape square = new Square(5);
-                shapes.add(square);
+        shapes.add(shape);
     }
         public int shapesSize() {
             return shapes.size();
@@ -24,7 +23,9 @@ public class ShapeCollector {
 
     public String getFigure(int n) {
         String shape = null;
-        shape = shapes.get(n).getShapeName();
+        if(n >= 0 && n < shapes.size()) {
+            shape = shapes.get(n).getShapeName();
+        }
         return shape;
     }
 
