@@ -20,14 +20,7 @@ public class BookLibrary {
     }
 
     public List<Book> listBooksInHandsOf(LibraryUser libraryUser) {
-        List<Book> bookList = new ArrayList<Book>();
-        String firstName = libraryUser.getFirstname();
-        String lastName = libraryUser.getLastname();
-        String peselID = libraryUser.getPeselId();
         List<Book> resultlist = libraryDatabase.listBooksInHandsOf(libraryUser);
-        if (firstName.equals(libraryUser.getFirstname()) && lastName.equals(libraryUser.getLastname()) && peselID.equals(libraryUser.getPeselId())) {
-            bookList = resultlist;
-        }
-        return bookList;
+        return resultlist;
     }
 }
