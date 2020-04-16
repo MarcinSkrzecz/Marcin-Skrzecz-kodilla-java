@@ -39,6 +39,7 @@ public class CollectionTestSuite {
             evenList.add(0);
             evenList.add(2);
             evenList.add(4);
+            evenList.add(6);
             //When
             OddNumbersExterminator testArray = new OddNumbersExterminator();
             System.out.println("Test: Case when ArrayList is not empty");

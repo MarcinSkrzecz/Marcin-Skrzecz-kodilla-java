@@ -155,7 +155,7 @@ public class StatisticsTests {
         Assert.assertEquals(10, mockStatistics.usersNames().size());
         Assert.assertEquals(100, mockStatistics.postsCount());
         Assert.assertEquals(10, mockStatistics.commentsCount());
-        Assert.assertEquals(0.1, averageCommentsPerPost, 0.01);
+        Assert.assertEquals(0.1, averageCommentsPerPost, 0.1);
         Assert.assertEquals(1, averageCommentsPerUser, 0.01);
         Assert.assertEquals(10, averagePostsPerUser, 0.01);
 
