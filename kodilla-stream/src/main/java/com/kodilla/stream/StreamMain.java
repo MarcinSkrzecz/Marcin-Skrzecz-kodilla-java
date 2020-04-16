@@ -1,16 +1,18 @@
 package com.kodilla.stream;
 
 
+import com.kodilla.stream.beautifier.PoemDecorator;
 import com.kodilla.stream.lambda.Processor;
-
 import com.kodilla.stream.lambda.ExpressionExecutor;
 import com.kodilla.stream.reference.FunctionalCalculator;
+import com.kodilla.stream.beautifier.PoemBeautifier;
 
 public class StreamMain {
     public static void main(String[] args) {
         Processor processor = new Processor();
         processor.execute(() -> System.out.println("This is an example text."));
 
+//-------------------------------------------------------------------------
 
         ExpressionExecutor expressionExecutor = new ExpressionExecutor();
 
@@ -25,5 +27,20 @@ public class StreamMain {
         expressionExecutor.executeExpression(3, 4, FunctionalCalculator::addAToB);
         expressionExecutor.executeExpression(3, 4, FunctionalCalculator::subBFromA);
         expressionExecutor.executeExpression(3, 4, FunctionalCalculator::divideAByB);
+
+//---------------------------------------------------------------------------------------------------------
+
+        PoemDecorator nr1 = text -> text.concat(" ... Work in progress");
+        PoemDecorator nr2 = text -> "ABC ~ " + text + " ~ ABC";
+        PoemDecorator nr3 = text -> text.toUpperCase();
+        PoemDecorator nr4 = text -> "Beatuified text: ||" + text + "|| contains " + text.length() + " signs";
+
+        PoemBeautifier poemBeautifier = new PoemBeautifier();
+
+        System.out.println(poemBeautifier.beautify("Text to beautify", nr1));
+        System.out.println(poemBeautifier.beautify("Text to beautify", nr2));
+        System.out.println(poemBeautifier.beautify("Text to beautify", nr3));
+        System.out.println(poemBeautifier.beautify("Text to beautify", nr4));
+
     }
 }
