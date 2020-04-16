@@ -21,10 +21,10 @@ public class ShapeCollector {
         return result;
     }
 
-    public String getFigure(int n) {
-        String shape = null;
+    public Shape getFigure(int n) {
+        Shape shape = null;
         if(n >= 0 && n < shapes.size()) {
-            shape = shapes.get(n).getShapeName();
+            shape = shapes.get(n);
         }
         return shape;
     }

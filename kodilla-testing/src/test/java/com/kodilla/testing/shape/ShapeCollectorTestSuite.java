@@ -50,10 +50,12 @@ public class ShapeCollectorTestSuite {
         //Given
         ShapeCollector collector = new ShapeCollector();
         Shape shape = new Square(5);
+        Shape shape2 = new Square(10);
         collector.addFigure(shape);
+        collector.addFigure(shape2);
         //When
-        String getShape = collector.getFigure(0);
+        Shape getShape = collector.getFigure(1);
         //Then
-        Assert.assertEquals(shape.getShapeName(), getShape);
+        Assert.assertEquals(shape2, getShape);
     }
 }
