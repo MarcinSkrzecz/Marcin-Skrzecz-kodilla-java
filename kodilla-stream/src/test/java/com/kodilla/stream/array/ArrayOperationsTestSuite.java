@@ -15,4 +15,16 @@ public class ArrayOperationsTestSuite {
         //Than
         Assert.assertEquals(5.5, average, 0.001);
     }
+
+    @Test
+    public void testGetAverageWhen0(){
+        //Given
+        int[] numbers = {};
+
+        //When
+        double average = ArrayOperations.getAverage(numbers);
+
+        //Than
+        Assert.assertEquals(0, average, 0.001);
+    }
 }
