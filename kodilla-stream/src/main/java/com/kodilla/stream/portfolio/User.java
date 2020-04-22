@@ -1,6 +1,6 @@
 package com.kodilla.stream.portfolio;
 
-public class User {
+public final class User {
     private final String username;
     private final String realName;
 
@@ -27,10 +27,8 @@ public class User {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
+        if (!(o instanceof User)) return false;
         User user = (User) o;
-
-        return username != null ? username.equals(user.username) : user.username == null;
+        return username.equals(user.username);
     }
 }

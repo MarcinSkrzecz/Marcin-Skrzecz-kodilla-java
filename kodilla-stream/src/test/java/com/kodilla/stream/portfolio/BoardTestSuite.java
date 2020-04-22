@@ -16,6 +16,7 @@ public class BoardTestSuite {
         User user2 = new User("projectmanager1", "Nina White");
         User user3 = new User("developer2", "Emilia Stephanson");
         User user4 = new User("developer3", "Konrad Bridge");
+
         //tasks
         Task task1 = new Task("Microservice for taking temperature",
                 "Write and test the microservice taking\n" +
@@ -24,51 +25,60 @@ public class BoardTestSuite {
                 user2,
                 LocalDate.now().minusDays(20),
                 LocalDate.now().plusDays(30));
+
         Task task2 = new Task("HQLs for analysis",
                 "Prepare some HQL queries for analysis",
                 user1,
                 user2,
                 LocalDate.now().minusDays(20),
                 LocalDate.now().minusDays(5));
+
         Task task3 = new Task("Temperatures entity",
                 "Prepare entity for temperatures",
                 user3,
                 user2,
                 LocalDate.now().minusDays(20),
                 LocalDate.now().plusDays(15));
+
         Task task4 = new Task("Own logger",
                 "Refactor company logger to meet our needs",
                 user3,
                 user2,
                 LocalDate.now().minusDays(10),
                 LocalDate.now().plusDays(25));
+
         Task task5 = new Task("Optimize searching",
                 "Archive data searching has to be optimized",
                 user4,
                 user2,
                 LocalDate.now(),
                 LocalDate.now().plusDays(5));
+
         Task task6 = new Task("Use Streams",
                 "use Streams rather than for-loops in predictions",
                 user4,
                 user2,
                 LocalDate.now().minusDays(15),
                 LocalDate.now().minusDays(2));
+
         //taskLists
-        TaskList taskListToDo = new TaskList("To_do");
-        taskListToDo.addTask(task1);
-        taskListToDo.addTask(task3);
-        TaskList taskListInProgress = new TaskList("In_progress");
-        taskListInProgress.addTask(task5);
-        taskListInProgress.addTask(task4);
-        taskListInProgress.addTask(task2);
+        TaskList taskListToDo = new TaskList("To do");
+            taskListToDo.addTask(task1);
+            taskListToDo.addTask(task3);
+
+        TaskList taskListInProgress = new TaskList("In progress");
+            taskListInProgress.addTask(task5);
+            taskListInProgress.addTask(task4);
+            taskListInProgress.addTask(task2);
+
         TaskList taskListDone = new TaskList("Done");
-        taskListDone.addTask(task6);
+            taskListDone.addTask(task6);
+
         //board
         Board project = new Board("Project Weather Prediction");
-        project.addTaskList(taskListToDo);
-        project.addTaskList(taskListInProgress);
-        project.addTaskList(taskListDone);
+            project.addTaskList(taskListToDo);
+            project.addTaskList(taskListInProgress);
+            project.addTaskList(taskListDone);
         return project;
     }
 
@@ -105,8 +115,8 @@ public class BoardTestSuite {
 
         //When
         List<TaskList> undoneTasks = new ArrayList<>();
-        undoneTasks.add(new TaskList("To_do"));
-        undoneTasks.add(new TaskList("In_progress"));
+        undoneTasks.add(new TaskList("To do"));
+        undoneTasks.add(new TaskList("In progress"));
         List<Task> tasks = project.getTaskLists().stream()
                 .filter(undoneTasks::contains)
                 .flatMap(tl -> tl.getTasks().stream())
@@ -125,7 +135,7 @@ public class BoardTestSuite {
 
         //When
         List<TaskList> inProgressTasks = new ArrayList<>();
-        inProgressTasks.add(new TaskList("In_progress"));
+        inProgressTasks.add(new TaskList("In progress"));
         long longTasks = project.getTaskLists().stream()
                 .filter(inProgressTasks::contains)
                 .flatMap(tl -> tl.getTasks().stream())
@@ -138,31 +148,33 @@ public class BoardTestSuite {
     }
 
     @Test
-    public void testAddTaskListAverageWorkingOnTask(){
+    public void testAddTaskListAverageWorkingOnTask() {
         //Given
         Board project = prepareTestData();
 
         //When
-        List<TaskList> inProgressTasks = new ArrayList<>();
-        inProgressTasks.add(new TaskList("In_progress"));
+        List<TaskList> allTasks = new ArrayList<>();
+        allTasks.add(new TaskList("To do"));
+        allTasks.add(new TaskList("In progress"));
+        allTasks.add(new TaskList("Done"));
 
-        List<Task> inProgressList = project.getTaskLists().stream()
-                .filter(inProgressTasks::contains)
-                .flatMap(tl -> tl.getTasks().stream())
-                .collect(Collectors.toList());
-
-        int today = LocalDate.now().getDayOfYear();
         int sumDays = project.getTaskLists().stream()
-                .filter(inProgressTasks::contains)
-                .flatMap(tl -> tl.getTasks().stream())
-                .map(t -> today - t.getCreated().getDayOfYear())
+                .filter(allTasks::contains)
+                .flatMap(d -> d.getTasks().stream())
+                .map(c -> c.getDeadline().getDayOfYear() - c.getCreated().getDayOfYear())
                 .reduce(0, Integer::sum);
 
-        double average = (double) sumDays / inProgressList.size();
+        int length = project.getTaskLists().stream()
+                .filter(allTasks::contains)
+                .map(s -> s.getTaskListSize())
+                .reduce(0, Integer::sum);
+
+        double average = sumDays / length;
 
         //Than
-        Assert.assertEquals(3, inProgressList.size());
-        Assert.assertEquals(30, sumDays);
-        Assert.assertEquals(10.0, average, 0.001);
+        Assert.assertEquals(6, length);
+        Assert.assertEquals(153, sumDays);
+        Assert.assertEquals(25.5, average, 0.001);
+
     }
 }
