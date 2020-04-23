@@ -7,8 +7,17 @@ public class Player {
 
 
 
-    public int makePlayerChoice() {
-        return scanner.nextInt();
+    public String makePlayerChoice() {
+        return scanner.nextLine();
+    }
+
+
+
+    public String moveName() {
+        String input = makePlayerChoice();
+        if("1".equals(input)) {
+            return "Rock"
+        } else if...
     }
 
     public static void main (String args[]){

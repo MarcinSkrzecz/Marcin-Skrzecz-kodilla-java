@@ -35,7 +35,7 @@ public class RPS {
 
             System.out.println("Make Your move");
 
-            int p = player.makePlayerChoice();
+            String p = player.makePlayerChoice();
             int c = 0;
             int hardModeLuck = random.nextInt(3);
 

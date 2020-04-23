@@ -3,9 +3,11 @@ package com.kodilla.stream.portfolio;
 import org.junit.Assert;
 import org.junit.Test;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 
 import static java.util.stream.Collectors.toList;
 
@@ -154,27 +156,28 @@ public class BoardTestSuite {
 
         //When
         List<TaskList> allTasks = new ArrayList<>();
-        allTasks.add(new TaskList("To do"));
+        //allTasks.add(new TaskList("To do"));
         allTasks.add(new TaskList("In progress"));
-        allTasks.add(new TaskList("Done"));
+        //allTasks.add(new TaskList("Done"));
 
         int sumDays = project.getTaskLists().stream()
                 .filter(allTasks::contains)
                 .flatMap(d -> d.getTasks().stream())
-                .map(c -> c.getDeadline().getDayOfYear() - c.getCreated().getDayOfYear())
-                .reduce(0, Integer::sum);
+                .map(c -> ChronoUnit.DAYS.between(c.getCreated(), LocalDate.now()))
+                .mapToInt(x -> x.intValue())
+                .sum();
 
         int length = project.getTaskLists().stream()
                 .filter(allTasks::contains)
                 .map(s -> s.getTaskListSize())
                 .reduce(0, Integer::sum);
 
-        double average = sumDays / length;
+        double average = (double) sumDays / length;
 
         //Than
-        Assert.assertEquals(6, length);
-        Assert.assertEquals(153, sumDays);
-        Assert.assertEquals(25.5, average, 0.001);
+        Assert.assertEquals(3, length);
+        Assert.assertEquals(30, sumDays);
+        Assert.assertEquals(10, average, 0.001);
 
     }
 }

@@ -3,8 +3,9 @@ package com.kodilla.stream;
 import com.kodilla.stream.forumuser.Forum;
 import com.kodilla.stream.forumuser.ForumUser;
 
+import java.time.temporal.ChronoUnit;
 import java.util.stream.Collectors;
-import java.util.*;
+import java.util.Map;
 import java.time.LocalDate;
 
 public class StreamMain {
@@ -14,15 +15,14 @@ public class StreamMain {
 
         Map<Integer, ForumUser> result = theForum.getUserList().stream()
                 .filter(user -> user.getSex() == 'M')
+                .filter(user -> ChronoUnit.YEARS.between(user.getBirthDate(), LocalDate.now()) >= 20)
                 .filter(user -> user.getCountOfUserPosts() > 0)
-                .filter(user -> user.getBirthDate().isBefore(LocalDate.now().minusYears(20)))
                 .collect(Collectors.toMap(ForumUser::getUserId, user -> user));
 
         System.out.println("# elements: " + result.size());
         result.entrySet().stream()
                 .map(entry -> entry.getKey() + ": " + entry.getValue())
                 .forEach(System.out::println);
-
     }
 }
 
@@ -134,9 +134,4 @@ public class StreamMain {
             .collect(Collectors.joining(",\n","<<",">>"));
 
         System.out.println(theResultStringOfBooks);
-
-
-
-
-
- */
+*/
