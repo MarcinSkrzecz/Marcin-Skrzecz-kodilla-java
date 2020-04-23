@@ -3,7 +3,7 @@ package com.kodilla.rps;
 import java.util.Scanner;
 
 public class Player {
-    Scanner scanner = new Scanner(System.in);
+/*    Scanner scanner = new Scanner(System.in);
 
 
 
@@ -24,5 +24,7 @@ public class Player {
         Player player = new Player();
         System.out.println("Choice: " + player.makePlayerChoice());
     }
+
+ */
 }
 

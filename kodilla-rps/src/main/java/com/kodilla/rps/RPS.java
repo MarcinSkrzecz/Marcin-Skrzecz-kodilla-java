@@ -5,7 +5,7 @@ import java.util.Random;
 public class RPS {
 
     public static void main(String args[]) {
-
+/*
         Settings settings = new Settings();
         Player player = new Player();
         Computer computer = new Computer();
@@ -97,5 +97,7 @@ public class RPS {
                 end = true;
             }
         }
+
+ */
     }
 }
