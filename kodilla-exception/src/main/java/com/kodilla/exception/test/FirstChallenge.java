@@ -17,14 +17,17 @@ public class FirstChallenge {
 
         FirstChallenge firstChallenge = new FirstChallenge();
 
-        try (double result = firstChallenge.divide(3, 0)) {
-            System.out.println(result);
+        try (double result = firstChallenge.divide(3, 1)) {
+
         } catch (ArithmeticException ae) {
-            System.out.println("It's impossible to divide by 0! Error: " + ae);
+            System.out.println("It's impossible to divide by 0!");
+            return 0;
+
         } finally {
             System.out.println("Operation finished!");
         }
 
+        System.out.println(result);
 
     }
 }

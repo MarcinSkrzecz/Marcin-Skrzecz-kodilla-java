@@ -9,19 +9,17 @@ import java.io.IOException;
 public class ExceptionModuleRunner {
 
     public static void main(String[] args){
-/*
+
         //FileReader fileReader = new FileReader();
         //fileReader.readFile();
-
+/*
         FileReaderWithoutHandling fileReader = new FileReaderWithoutHandling();
         try{
             fileReader.readFile();
-        } catch (FileReaderException){
+        } catch (FileReaderException fre) {
             System.out.println("Problem while reading file");
         }
 
  */
-
-
     }
 }
