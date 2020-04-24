@@ -12,11 +12,13 @@ public class ExceptionModuleRunner {
         //fileReader.readFile();
 
         FileReaderWithoutHandling fileReader = new FileReaderWithoutHandling();
-
+/*
         try{
             fileReader.readFile();
         } catch (FileReaderException e){
             System.out.println("Problem while reading file");
         }
+
+ */
     }
 }
