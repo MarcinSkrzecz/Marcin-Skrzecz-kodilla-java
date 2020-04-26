@@ -14,7 +14,7 @@ public class FirstChallenge {
      * @param args
      */
     public static void main(String[] args) {
-
+/*
         FirstChallenge firstChallenge = new FirstChallenge();
 
         try (double result = firstChallenge.divide(3, 1)) {
@@ -28,6 +28,8 @@ public class FirstChallenge {
         }
 
         System.out.println(result);
+
+ */
 
     }
 }
