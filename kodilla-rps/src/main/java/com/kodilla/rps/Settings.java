@@ -5,28 +5,55 @@ import java.util.Scanner;
 public class Settings {
 
     Scanner scanner = new Scanner(System.in);
-    RPS rps = new RPS();
+    GameApplicationEngine gae = new GameApplicationEngine();
 
     public void askUsername() {
         System.out.println("Please set Your Username");
     }
     public String setUsername() {
-        return scanner.next();
+        return scanner.nextLine();
     }
 
     public void askRoundsNumber() {
-        System.out.println("Please set number of wining rounds to play");
+        System.out.println("Please set number of winning rounds to play");
     }
     public int setRoundsNumber() {
-        return scanner.nextInt();
+        int number;
+        while(true) {
+            String roundsNumber = scanner.nextLine();
+            try {
+                number = Integer.parseInt(roundsNumber);
+            } catch (Exception e) {
+                System.out.println("Please provide valid number");
+                continue;
+            }
+            if(number > 0) {
+                return number;
+            }
+            System.out.println("Provided number is too low");
+        }
     }
 
     public void askDifficulty() {
-        System.out.println("Please set difficulty: 0 = normal, 1 = hard");
+        System.out.println("Please set difficulty:");
+        System.out.println("Normal - press 0");
+        System.out.println("Hard - press 1");
     }
-
     public int setDifficulty() {
-        return scanner.nextInt();
+        int difficulty;
+        while(true) {
+            String difficultySelect = scanner.nextLine();
+            try {
+                difficulty = Integer.parseInt(difficultySelect);
+            } catch (Exception e) {
+                System.out.println("Please provide valid number");
+                continue;
+            }
+            if(difficulty == 0 || difficulty == 1) {
+                return difficulty;
+            }
+            System.out.println("Provided different than other than 0 or 1");
+        }
     }
 
     public void rules() {
@@ -42,16 +69,20 @@ public class Settings {
     }
 
     public void endGame() {
-        System.out.println("Do You want to end game? y/n");
+        System.out.println("Do You want to end actual game?");
+        System.out.println("Yes - press y");
+        System.out.println("No - press n");
         boolean endGameAction = false;
         while(!endGameAction) {
-            String endGameQuestion = scanner.next();
+            String endGameQuestion = scanner.nextLine();
             if(endGameQuestion.equals("y")) {
+                System.out.println("Thanks for good game :) Bye!!!");
                 System.exit(0);
                 endGameAction = true;
             } else if (endGameQuestion.equals("n")) {
                 //nothing
                 endGameAction = true;
+                return;
             } else {
                 System.out.println("Wrong choice");
             }
@@ -59,15 +90,17 @@ public class Settings {
     }
 
     public void resetGame() {
-        System.out.println("Do You want to reset actual game? y/n");
+        System.out.println("Do You want to reset actual game?");
+        System.out.println("Yes - press y");
+        System.out.println("No - press n");
         boolean resetGameAction = false;
         while(!resetGameAction) {
-            String resetGameQuestion = scanner.next();
+            String resetGameQuestion = scanner.nextLine();
             if(resetGameQuestion.equals("y")) {
                 System.out.println("******************************");
-                System.out.println("New Game Starting... >>>> NIE DZIALAAAAAAAAAAAAAA");
+                System.out.println("New Game Starting...");
                 System.out.println("******************************");
-                resetGameAction = true;
+                gae.game();
             } else if (resetGameQuestion.equals("n")) {
                 //nothing
                 resetGameAction = true;
@@ -81,22 +114,25 @@ public class Settings {
         System.out.println("******************************");
         System.out.println("Thanks for playing");
         System.out.println("******************************");
-        System.out.println("If you want to end game press n. For new game press n");
+        System.out.println("End game - press n");
+        System.out.println("New game - press x");
         System.out.println("******************************");
 
         boolean wagaction = false;
         while(!wagaction) {
-            String wagChoice = scanner.next();
+            String wagChoice = scanner.nextLine();
             if(wagChoice.equals("n")) {
+                System.out.println("Thanks for good game :) Bye!!!");
                 System.exit(0);
-                wagaction = true;
-            } else if (wagChoice.equals("n")) {
+            } else if (wagChoice.equals("x")) {
                 System.out.println("******************************");
-                System.out.println("New Game Starting... >>>> NIE DZIALAAAAAAAAAAAAAA");
+                System.out.println("New Game Starting...");
                 System.out.println("******************************");
-                rps.game();
+                gae.game();
             } else {
                 System.out.println("Wrong choice");
+                System.out.println("End game - press n");
+                System.out.println("New game - press x");
             }
         }
     }
