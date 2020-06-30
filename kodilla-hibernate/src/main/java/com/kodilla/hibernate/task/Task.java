@@ -14,14 +14,20 @@ import java.util.Date;
         @NamedQuery(
                 name = "Task.retrieveShortTasks",
                 query = "FROM Task WHERE duration <= 10"
+        ),
+        @NamedQuery(
+                name = "Task.retrieveTasksWithDurationLongerThan",
+                query = "FROM Task WHERE duration > :DURATION"
         )
 })
+
 @NamedNativeQuery(
         name = "Task.retrieveTasksWithEnoughTime",
         query = "SELECT * FROM TASKS" +
-                "WHERE DATEDIFF(DATE_ADD(CREATED, INTERVAL DURATION DAY), NOW()) > 5",
+                " WHERE DATEDIFF(DATE_ADD(CREATED, INTERVAL DURATION DAY), NOW()) > 5",
         resultClass = Task.class
 )
+
 
 @Entity
 @Table(name = "TASKS")
@@ -56,29 +62,29 @@ public final class Task {
     }
 
     @NotNull
-    @Column(name = "CREATED")
+    @Column(name="CREATED")
     public Date getCreated() {
         return created;
     }
 
-    @Column(name = "DURATION")
+    @Column(name="DURATION")
     public int getDuration() {
         return duration;
     }
 
-    public void setId(int id) {
+    private void setId(int id) {
         this.id = id;
     }
 
-    public void setDescription(String description) {
+    private void setDescription(String description) {
         this.description = description;
     }
 
-    public void setCreated(Date created) {
+    private void setCreated(Date created) {
         this.created = created;
     }
 
-    public void setDuration(int duration) {
+    private void setDuration(int duration) {
         this.duration = duration;
     }
 
