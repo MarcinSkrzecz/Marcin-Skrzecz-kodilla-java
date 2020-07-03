@@ -1,7 +1,6 @@
 package com.kodilla.hibernate.manytomany.dao;
 
 import com.kodilla.hibernate.manytomany.Company;
-import com.kodilla.hibernate.task.Task;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -13,6 +12,6 @@ import java.util.List;
 @Transactional
 @Repository
 public interface CompanyDao extends CrudRepository<Company, Integer> {
-    @Query(nativeQuery = true)
+    @Query
     List<Company> SearchByCompanyFirst3Signs(@Param("COMPANY_FIRST_3_SIGNS") String signs);
 }

@@ -5,13 +5,12 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@NamedNativeQuery(
+@NamedQuery(
         name = "Company.SearchByCompanyFirst3Signs",
-        query = "SELECT * FROM COMPANY WHERE LEFT(COMPANY_NAME,3) = SUBSTRING(:COMPANY_FIRST_3_SIGNS,0,3)",
-        resultClass = Company.class
+        query = "FROM COMPANY WHERE SUBSTRING(name,1,3) = :COMPANY_FIRST_3_SIGNS"
 )
 
-@Entity
+@Entity(name = "COMPANY")
 @Table(name = "COMPANIES")
 public class Company {
     private int id;
@@ -26,7 +25,7 @@ public class Company {
     }
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
     @Column(name = "COMPANY_ID", unique = true)
     public int getId() {
