@@ -5,10 +5,18 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@NamedQuery(
-        name = "Company.SearchByCompanyFirst3Signs",
-        query = "FROM COMPANY WHERE SUBSTRING(name,1,3) = :COMPANY_FIRST_3_SIGNS"
-)
+@NamedQueries({
+        @NamedQuery(
+                name = "Company.SearchByCompanyFirst3Signs",
+                query = "FROM COMPANY WHERE SUBSTRING(name,1,3) = :COMPANY_FIRST_3_SIGNS"
+        ),
+        @NamedQuery(
+                name = "Company.searchByCompanyNameFragment",
+                query = "FROM COMPANY WHERE name Like CONCAT('%', :NAME, '%')"
+        )
+})
+
+
 
 @Entity(name = "COMPANY")
 @Table(name = "COMPANIES")

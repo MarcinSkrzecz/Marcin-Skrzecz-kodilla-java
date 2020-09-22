@@ -14,4 +14,6 @@ import java.util.List;
 public interface CompanyDao extends CrudRepository<Company, Integer> {
     @Query
     List<Company> SearchByCompanyFirst3Signs(@Param("COMPANY_FIRST_3_SIGNS") String signs);
+    @Query
+    List<Company> searchByCompanyNameFragment(@Param("COMPANY_NAME") String name);
 }
