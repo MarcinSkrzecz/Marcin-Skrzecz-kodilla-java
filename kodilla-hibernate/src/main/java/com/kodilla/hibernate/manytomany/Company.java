@@ -12,7 +12,7 @@ import java.util.List;
         ),
         @NamedQuery(
                 name = "Company.searchByCompanyNameFragment",
-                query = "FROM COMPANY WHERE name Like CONCAT('%', :NAME, '%')"
+                query = "FROM COMPANY WHERE name Like CONCAT('%', :COMPANY_NAME, '%')"
         )
 })
 
