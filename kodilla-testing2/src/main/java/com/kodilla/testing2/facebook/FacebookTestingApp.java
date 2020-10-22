@@ -8,32 +8,50 @@ import org.openqa.selenium.support.ui.Select;
 
 public class FacebookTestingApp {
 
-    public static final String XPATH_SELECT_REGISTER = "//div[contains(@class, \"_6ltg\")]/a[contains(@role, \"button\")]";
-    public static final String XPATH_WAIT_FOR = "//div[contains(@class, \"_8ien\")]";
-    public static final String XPATH_SELECT_DAY = "//div[contains(@class, \"_5k_5\")]/span/span/select[contains(@aria-label, \"Dzień\")]";
-    public static final String XPATH_SELECT_MONTH = "//div[contains(@class, \"_5k_5\")]/span/span/select[contains(@aria-label, \"Miesiąc\")]";
-    public static final String XPATH_SELECT_YEAR = "//div[contains(@class, \"_5k_5\")]/span/span/select[contains(@aria-label, \"Rok\")]";
+    public static final String ACCEPTALL = "u_0_k";
+    public static final String REGISTER = "u_0_2";
+    public static final String REGISTER_WINDOW_NAME = "u_2_d";
+    public static final String DAY = "day";
+    public static final String MONTH = "month";
+    public static final String YEAR = "year";
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         WebDriver driver = WebDriverConfig.getDriver(WebDriverConfig.CHROME);
-        driver.get("https://facebook.com/");
+        driver.get("https://pl-pl.facebook.com/");
 
-        WebElement registerField = driver.findElement(By.xpath(XPATH_SELECT_REGISTER));
-        registerField.submit();
+        Thread.sleep(2000);
 
-        while (!driver.findElement(By.xpath(XPATH_WAIT_FOR)).isDisplayed());
+        while (!driver.findElement(By.id(ACCEPTALL)).isDisplayed());
 
-        WebElement selectDay = driver.findElement(By.xpath(XPATH_SELECT_DAY));
+        Thread.sleep(2000);
+
+        WebElement acceptAll = driver.findElement(By.id(ACCEPTALL));
+        acceptAll.click();
+
+        Thread.sleep(2000);
+
+        WebElement registerField = driver.findElement(By.id(REGISTER));
+        registerField.click();
+
+        Thread.sleep(2000);
+
+        //while (!driver.findElement(By.id(REGISTER_WINDOW_NAME)).isDisplayed());
+
+        WebElement selectDay = driver.findElement(By.id(DAY));
         Select selectDayNumber = new Select(selectDay);
         selectDayNumber.selectByIndex(26);
 
-        WebElement selectMonth = driver.findElement(By.xpath(XPATH_SELECT_MONTH));
-        Select selectMonthNumber = new Select(selectMonth);
-        selectMonthNumber.selectByIndex(26);
+        //Thread.sleep(5000);
 
-        WebElement selectYear = driver.findElement(By.xpath(XPATH_SELECT_YEAR));
+        WebElement selectMonth = driver.findElement(By.id(MONTH));
+        Select selectMonthNumber = new Select(selectMonth);
+        selectMonthNumber.selectByIndex(11);
+
+        //Thread.sleep(5000);
+
+        WebElement selectYear = driver.findElement(By.id(YEAR));
         Select selectYearNumber = new Select(selectYear);
-        selectYearNumber.selectByIndex(26);
+        selectYearNumber.selectByValue("1991");
     }
 }
